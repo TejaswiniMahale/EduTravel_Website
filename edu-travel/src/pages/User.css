@@ -1,0 +1,10 @@
+.User_Data{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin: auto;
+}
+.User_Data_Sidebar{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.User_Data_Sidebar>div>button{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
