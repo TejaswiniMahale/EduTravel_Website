@@ -3,6 +3,7 @@ import Footer from '../component/Footer'
 import Navbar from "../component/Navbar"
 import {
   Button,
+  Center,
   Flex,
   Heading,
   Image,
@@ -78,7 +79,7 @@ const HomePage = () => {
   <Text fontSize="16px" color="gray.400"
     lineHeight="24px">Shiksha Study Abroad has information about</Text>
     <Box marginTop="10px"></Box>
-  <Text marginLeft="450px" backgroundColor="orange" padding="12px" fontSize="15px" width="300px" borderRadius="4.2px" color="white" >Know more about Shiksha Counseling</Text>
+  <Center><Text  backgroundColor="orange" padding="12px" fontSize="15px" width="300px" borderRadius="4.2px" color="white" >Know more about EduTravel Counseling</Text></Center>
 </div>
 <div style={{width:"80%" ,margin:"auto"}}>
 <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>

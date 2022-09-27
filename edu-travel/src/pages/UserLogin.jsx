@@ -23,15 +23,17 @@ import {
 } from '@chakra-ui/react';
 // import {useState } from 'react';
 import "./User.css"
+import { useToast } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import Navbar from '../component/Navbar';
 import SignIn from '../component/SignIn';
 import Footer from '../component/Footer';
 
 const UserLogin = () => {
+  const toast = useToast()
   let [name,setName] = useState("")
   let [email,setEmail] = useState("")
-  let [mobile,setMobile] = useState()
+  let [mobile,setMobile] = useState("")
   let [country,setCountry] = useState("")
   let [desc,setDesc] = useState("")
   let [password,setPassword]=useState("")
@@ -42,24 +44,46 @@ const UserLogin = () => {
   const navigate = useNavigate()
 
 const signUpHandler=()=>{
-  const payload={
-    name:name,
-    email:email,
-    mobile:mobile,
-    country:country,
-    password:password,
-    desc:desc,
-    doc:doc,
-    count:count,
-    status:status
+  if(name!=="" && email!=="" && mobile!=="" && country!=="" && password!==""){
+    const payload={
+      name:name,
+      email:email,
+      mobile:mobile,
+      country:country,
+      password:password,
+      desc:desc,
+      doc:doc,
+      count:count,
+      status:status
+    }
+    dispatch(postUser(payload))
+       .then(()=>{
+        console.log("hello")
+      })
+      .then(()=>{
+        toast({
+          title: 'Signup in Successfull.',
+          description: "Welcome",
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+          position:"top"
+        })
+      })
+      .then(()=>{
+        navigate(`/`)
+      })
   }
-  dispatch(postUser(payload))
-     .then(()=>{
-      console.log("hello")
+  else{
+    toast({
+      title: 'Signup Failed.',
+      description: "Please enter correct Details.",
+      status: 'error',
+      duration: 3000,
+      isClosable: true,
+      position:"top"
     })
-    .then(()=>{
-      navigate(`/`)
-    })
+  }
 }
 const [showPassword, setShowPassword] = useState(false);
   return (
@@ -90,19 +114,19 @@ const [showPassword, setShowPassword] = useState(false);
           p={8}>
           <Stack spacing={4}>
             
-                <FormControl  isRequired>
+                <FormControl  required>
                   <FormLabel>Name</FormLabel>
-                  <Input type="text" onChange={(e)=>setName(e.target.value)} placeholder='enter your name'/>
+                  <Input type="text" onChange={(e)=>setName(e.target.value)} placeholder='enter your name' required/>
                 </FormControl>
              
-            <FormControl id="email" isRequired>
+            <FormControl id="email" required>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" onChange={(e)=>setEmail(e.target.value)} placeholder="email"/>
+              <Input type="email" onChange={(e)=>setEmail(e.target.value)} placeholder="email" required/>
             </FormControl>
-            <FormControl id="password" isRequired>
+            <FormControl id="password" required>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} onChange={(e)=>setPassword(e.target.value)} placeholder="password"/>
+                <Input type={showPassword ? 'text' : 'password'} onChange={(e)=>setPassword(e.target.value)} placeholder="password" required/>
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}
@@ -114,11 +138,11 @@ const [showPassword, setShowPassword] = useState(false);
                 </InputRightElement>
               </InputGroup>
             </FormControl>
-            <FormControl id="email" isRequired>
+            <FormControl id="email" required>
               <FormLabel>Mobile Number</FormLabel>
-              <Input type="number" onChange={(e)=>setMobile(e.target.value)} placeholder="mobile no."/>
+              <Input type="number" onChange={(e)=>setMobile(e.target.value)} placeholder="mobile no." required/>
             </FormControl>
-            <FormControl id="email" isRequired>
+            <FormControl id="email" required>
               <FormLabel>Select Country</FormLabel>
               <Select placeholder='Select Country' onChange={(e)=>setCountry(e.target.value)}>
         <option value="Australia">Australia</option>
